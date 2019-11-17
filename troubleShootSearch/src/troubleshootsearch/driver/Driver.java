@@ -1,5 +1,11 @@
 package troubleshootsearch.driver;
 
+import java.util.List;
+import troubleshootsearch.element.MyArrayList;
+import troubleshootsearch.element.MyTree;
+import troubleshootsearch.visitor.ExactMatcher;
+import troubleshootsearch.visitor.SemanticMatcher;
+
 /**
  * @author Yash Shingadiya
  *
@@ -23,19 +29,31 @@ public class Driver {
 		 * Restricting the order and name of the input and output files
 		 */
 		String input1 = "technicalInfo.txt";
-		String input2 = "userInfo.txt";
+		String input2 = "userInput.txt";
 		String input3 = "synonyms.txt";
 		String input4 = "output.txt";
 		
 		if((args[0].equals(input1)) && (args[1].equals(input2)) && (args[2].equals(input3)) && (args[3].equals(input4))){
 
 			
-		
+			MyArrayList myArrayList = new MyArrayList();
+			myArrayList.technicalInfoProcessing(input1);
+
+			ExactMatcher exactMatcher = new ExactMatcher();
+			myArrayList.accept(exactMatcher);
+
+			/*SemanticMatcher semanticMatcher = new SemanticMatcher();
+			myArrayList.accept(semanticMatcher);
+*/
+			MyTree myTree = new MyTree();
+			myTree.userInfoProcessing(input2);
+			myTree.accept(exactMatcher,input2);
+			/*myTree.accept(semanticMatcher,input3);*/			
 		}	
 
 		else{
 
-			System.err.println("Please pass arguments in following order: technicalInfo.txt userInfo.txt synonyms.txt output.txt");
+			System.err.println("Please pass arguments in following order: technicalInfo.txt userInput.txt synonyms.txt output.txt");
 			System.exit(0);
 		}
 
