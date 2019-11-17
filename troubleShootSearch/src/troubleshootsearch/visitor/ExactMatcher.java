@@ -1,7 +1,6 @@
 package troubleshootsearch.visitor;
 
 import java.util.List;
-import troubleshootsearch.util.FileProcessor;
 import troubleshootsearch.element.MyArrayList;
 import troubleshootsearch.element.MyTree;
 import troubleshootsearch.element.Node;

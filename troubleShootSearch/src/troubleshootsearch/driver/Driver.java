@@ -42,13 +42,13 @@ public class Driver {
 			ExactMatcher exactMatcher = new ExactMatcher();
 			myArrayList.accept(exactMatcher);
 
-			/*SemanticMatcher semanticMatcher = new SemanticMatcher();
+			SemanticMatcher semanticMatcher = new SemanticMatcher();
 			myArrayList.accept(semanticMatcher);
-*/
+
 			MyTree myTree = new MyTree();
 			myTree.userInfoProcessing(input2);
 			myTree.accept(exactMatcher,input2);
-			/*myTree.accept(semanticMatcher,input3);*/			
+			myTree.accept(semanticMatcher,input3);			
 		}	
 
 		else{
