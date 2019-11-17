@@ -5,6 +5,7 @@ import troubleshootsearch.element.MyArrayList;
 import troubleshootsearch.element.MyTree;
 import troubleshootsearch.visitor.ExactMatcher;
 import troubleshootsearch.visitor.SemanticMatcher;
+import troubleshootsearch.visitor.NaiveBayesMatcher;
 
 /**
  * @author Yash Shingadiya
@@ -39,16 +40,20 @@ public class Driver {
 			MyArrayList myArrayList = new MyArrayList();
 			myArrayList.technicalInfoProcessing(input1);
 
-			ExactMatcher exactMatcher = new ExactMatcher();
+/*			ExactMatcher exactMatcher = new ExactMatcher();
 			myArrayList.accept(exactMatcher);
+*/
+		/*	SemanticMatcher semanticMatcher = new SemanticMatcher();
+			myArrayList.accept(semanticMatcher);*/
 
-			SemanticMatcher semanticMatcher = new SemanticMatcher();
-			myArrayList.accept(semanticMatcher);
+			NaiveBayesMatcher naiveBayesMatcher = new NaiveBayesMatcher();
+			myArrayList.accept(naiveBayesMatcher);
 
 			MyTree myTree = new MyTree();
 			myTree.userInfoProcessing(input2);
-			myTree.accept(exactMatcher,input2);
-			myTree.accept(semanticMatcher,input3);			
+/*			myTree.accept(exactMatcher,input2);*/
+/*			myTree.accept(semanticMatcher,input3);*/
+			myTree.accept(naiveBayesMatcher,input2);			
 		}	
 
 		else{

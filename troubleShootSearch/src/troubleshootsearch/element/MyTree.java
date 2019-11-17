@@ -32,6 +32,7 @@ public class MyTree implements Element{
     	exactMatcher.visit(this, wordsFile);
     }
     public void accept(NaiveBayesMatcher naiveBayesMatcher,String wordsFile){
+    	
     	naiveBayesMatcher.visit(this, wordsFile);
     } 
     public void accept(SemanticMatcher semanticMatcher,String wordsFile){

@@ -11,10 +11,12 @@ public class Node{
    
     private String word;
     private Map<String,String> words;
+    private int wordCount;
 
     public Node(){
 
         this.words = new HashMap<String,String>();
+        this.wordCount = 0;
     }
     public void setNode(String word){
 
@@ -25,4 +27,5 @@ public class Node{
 
         return this.word;
     }
+    
 } 

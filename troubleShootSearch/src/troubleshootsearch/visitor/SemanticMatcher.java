@@ -55,7 +55,7 @@ public class SemanticMatcher implements Visitor{
 				
 				if(synonyms.containsKey(endpart[1])){
 					
-					if(this.inputString.get(i).contains(synonyms.get(endpart[1]))){
+					if(this.inputString.get(i).contains(synonyms.get(endpart[1]))||this.inputString.get(i).contains(endpart[1])){
 
 						System.out.println(this.inputString.get(i));
 					}
