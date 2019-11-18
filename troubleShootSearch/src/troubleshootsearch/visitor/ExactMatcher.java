@@ -25,10 +25,10 @@ public class ExactMatcher implements Visitor{
 
 				if(this.inputString.get(i).contains(this.nodesList.get(j).getWord())){
 
-					System.out.println(this.inputString.get(i));
+					/*System.out.println(this.inputString.get(i));*/
 				}
 			}
 		}
-		System.out.println("No exact match");
+		/*System.out.println("No exact match");*/
 	}
 }

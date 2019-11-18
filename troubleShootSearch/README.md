@@ -26,10 +26,10 @@ Description: Compiles your code and generates .class files inside the BUILD fold
 -----------------------------------------------------------------------
 ## Instruction to run:
 
-####Command: ant -buildfile troubleShootSearch/src/build.xml run -Darg0="technicalInfo.txt" -Darg1="userInfo.txt" -Darg2="synonyms.txt" -Darg3="output.txt"  
+####Command: ant -buildfile troubleShootSearch/src/build.xml run -Darg0="technicalInfo.txt" -Darg1="userInfo.txt" -Darg2="synonyms.txt" -Darg3="output.txt" -Darg4="0"  
 
 Note: Arguments accept the absolute path of the files.
-
+- The last argument can be any integer from 0-4
 
 -----------------------------------------------------------------------
 ## Description:

@@ -44,7 +44,7 @@ public class NaiveBayesMatcher implements Visitor{
 			}
 		}
 
-		System.out.println(wordCount+""+wordLineMapping.get(firstpart[0]));
+		/*System.out.println(wordCount+""+wordLineMapping.get(firstpart[0]));*/
 
 		for (Map.Entry<String, List<Integer>> entry : wordLineMapping.entrySet()) {
 		    
@@ -52,10 +52,10 @@ public class NaiveBayesMatcher implements Visitor{
 		    List<Integer> value = entry.getValue();
 		    
 		    for(Integer line : value){
-		        System.out.println("key : " + key + " value : " + line);
+		        /*System.out.println("key : " + key + " value : " + line);*/
 		    }
 		}
 
-		System.out.println("No naive stemming match");
+		/*System.out.println("No naive stemming match");*/
 	}
 }

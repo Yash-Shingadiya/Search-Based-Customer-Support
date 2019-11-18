@@ -5,6 +5,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.File;
 import java.io.IOException;
+import troubleshootsearch.util.MyLogger;
+import troubleshootsearch.util.MyLogger.DebugLevel;
 
 /**
  * Reference: https://stackoverflow.com/questions/3806062/how-to-open-a-txt-file-and-read-numbers-in-java
@@ -18,6 +20,8 @@ public class FileProcessor {
 	
 	static int noOfLines = 0;
 	private BufferedReader br;
+	MyLogger ml = new MyLogger();
+	private String inputFile;
 	
 	/** 
 	 * Constructor initialises the input file and checks whether it exists or not
@@ -26,7 +30,10 @@ public class FileProcessor {
 		
 		try 
 		{
-			File f = new File(inputFile);
+			this.inputFile = inputFile;	
+			ml.writeMessage("Constructor called: FileProcessor()", DebugLevel.CONSTRUCTOR);
+			File f = new File(this.inputFile);
+			
 			if(f.length() == 0){
 				System.err.println("The given input file is empty or file does not exist");
 				System.exit(0);	
@@ -51,7 +58,8 @@ public class FileProcessor {
 			String s = null;
 			
 			while ((s = this.br.readLine()) != null) {
-			
+				
+				ml.writeMessage("Reading line from: "+this.inputFile+" "+"file: "+ s, DebugLevel.FROM_INPUTFILE);
 				return s;	
 			}
 		} 

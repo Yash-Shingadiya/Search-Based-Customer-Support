@@ -7,14 +7,18 @@ import troubleshootsearch.visitor.NaiveBayesMatcher;
 import troubleshootsearch.visitor.SemanticMatcher;
 import troubleshootsearch.util.FileProcessor;
 import troubleshootsearch.element.Node;
+import troubleshootsearch.util.MyLogger;
+import troubleshootsearch.util.MyLogger.DebugLevel;
 
 public class MyTree implements Element{ 
    
    	Node node;
    	private List<Node> nodesList;
-
+    MyLogger ml = new MyLogger();
+    
    	public MyTree(){
 
+   		ml.writeMessage("Constructor called: MyTree()", DebugLevel.CONSTRUCTOR);
    		this.nodesList = new ArrayList<Node>();
    	}
 
