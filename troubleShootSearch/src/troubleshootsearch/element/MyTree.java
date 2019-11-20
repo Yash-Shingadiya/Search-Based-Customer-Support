@@ -31,17 +31,58 @@ public class MyTree implements Element{
     public void accept(NaiveBayesMatcher naiveBayesMatcher){} 
     public void accept(SemanticMatcher semanticMatcher){}
 
-    public void accept(ExactMatcher exactMatcher,String wordsFile){
+    
+    public String accept(ExactMatcher exactMatcher,String wordsFile){
 
-    	exactMatcher.visit(this, wordsFile);
+      String result = "";
+
+      result = "user input - "+wordsFile+"\n";
+      result = result+"Exact Match"+"\n";
+      result = result+"-----------"+"\n";
+      result = result+exactMatcher.visit(this, wordsFile);
+      ml.writeMessage(result,DebugLevel.IN_RESULTS);
+      return result;
     }
-    public void accept(NaiveBayesMatcher naiveBayesMatcher,String wordsFile){
-    	
-    	naiveBayesMatcher.visit(this, wordsFile);
+    public String accept(NaiveBayesMatcher naiveBayesMatcher,String wordsFile){
+  
+      String result = ""+"\n";
+      result = result + "Naive Stemming Match"+"\n";
+      result = result + "--------------------"+"\n";
+      result = result + naiveBayesMatcher.visit(this, wordsFile);
+      ml.writeMessage(result,DebugLevel.IN_RESULTS);
+      return result;
     } 
-    public void accept(SemanticMatcher semanticMatcher,String wordsFile){
-    	
-    	semanticMatcher.visit(this, wordsFile);
+    public String accept(SemanticMatcher semanticMatcher,String wordsFile){return null;} 
+
+    public String accept(SemanticMatcher semanticMatcher,String wordsFile,String synonymsFile){
+    
+      FileProcessor fileProcessor = new FileProcessor(synonymsFile);
+  
+      String[] synonyms = null;
+      String info = null;
+      String result = ""+"\n";
+      result = result + "Semantic Match"+"\n";
+      result = result + "--------------"+"\n";
+
+    try{      
+
+      while((info = fileProcessor.readLineFromFile()) != null){
+            
+          synonyms = info.split("=");  
+          result = result + semanticMatcher.visit(this,wordsFile,synonyms[0],synonyms[1])+"\n";
+          ml.writeMessage(result,DebugLevel.IN_RESULTS);
+          return result;          
+        }
+      }
+      
+      catch(Exception e){
+
+        System.err.println("Please check the formatting of input file");
+        System.exit(0);
+      }
+    
+      finally{}
+      return null;
     } 
 
     public void userInfoProcessing(String inputFile){

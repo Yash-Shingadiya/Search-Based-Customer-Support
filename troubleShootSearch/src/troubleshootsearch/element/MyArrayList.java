@@ -16,9 +16,9 @@ public class MyArrayList implements Element{
    		return this.technicalInfo;
    	}
 
-   	public void accept(ExactMatcher exactMatcher, String inputFile){}
-    public void accept(NaiveBayesMatcher naiveBayesMatcher, String inputFile){} 
-    public void accept(SemanticMatcher semanticMatcher, String inputFile){} 
+    public String accept(ExactMatcher exactMatcher, String inputFile){return null;}
+    public String accept(NaiveBayesMatcher naiveBayesMatcher, String inputFile){return null;} 
+    public String accept(SemanticMatcher semanticMatcher, String inputFile){return null;} 
 
     public void accept(ExactMatcher exactMatcher){
 

@@ -6,5 +6,5 @@ import troubleshootsearch.element.MyTree;
 public interface Visitor{ 
    
     public void visit(MyArrayList myArrayList);
-    public void visit(MyTree myTree, String inputFile); 
+    public String visit(MyTree myTree, String inputFile); 
 } 

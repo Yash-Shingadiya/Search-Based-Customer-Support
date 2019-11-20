@@ -19,43 +19,44 @@ public class NaiveBayesMatcher implements Visitor{
 		this.inputString = myArrayList.getMyArrayList();
 	}
 
-	public void visit(MyTree myTree,String wordsFile){
+	public String visit(MyTree myTree,String wordsFile){
 
     	String info = null;
     	String[] firstpart = null;
+    	String[] individualWords = null;
+    	String result = "";
     	int wordCount = 0;
     	List<Integer> lineNumber = new ArrayList<Integer>(); 
     	Map<String,List<Integer>> wordLineMapping = new HashMap<String,List<Integer>>();
-    	this.nodesList = myTree.getNodesList();
-
+    
 		for(int i = 0; i < this.inputString.size(); i++){
-		
-			for(int j = 0; j < this.nodesList.size(); j++){
-				
-				firstpart = this.nodesList.get(j).getWord().split(" ");
-				
-				if(this.inputString.get(i).contains(firstpart[0])){
+			
+				firstpart = wordsFile.split(" ");	
+				individualWords = this.inputString.get(i).split(" ");
 
-					wordCount++;
-					lineNumber.add((i+1));
-					wordLineMapping.put(firstpart[0],lineNumber);
-					/*System.out.println(this.inputString.get(i)+" "+wordCount+" "+(i+1));*/
+				for (int j = 0;j < individualWords.length ;j++ ) {
+				
+					if((individualWords[j].contains(firstpart[0])) && (individualWords[j].length() != firstpart[0].length())){
+						
+						wordCount++;
+						lineNumber.add((i+1));
+						wordLineMapping.put(firstpart[0],lineNumber);
+						result = ""+"Word Count = "+String.valueOf(wordCount)+"\n"+"Line Numbers = "+wordLineMapping.get(firstpart[0])+"";		
+					}	
 				}
-			}
+			
+			individualWords = null;
+			wordLineMapping.clear();
 		}
 
-		/*System.out.println(wordCount+""+wordLineMapping.get(firstpart[0]));*/
+		if(wordCount > 0){
 
-		for (Map.Entry<String, List<Integer>> entry : wordLineMapping.entrySet()) {
-		    
-		    String key = entry.getKey();
-		    List<Integer> value = entry.getValue();
-		    
-		    for(Integer line : value){
-		        /*System.out.println("key : " + key + " value : " + line);*/
-		    }
+			return result;
 		}
+		else{
 
-		/*System.out.println("No naive stemming match");*/
+			result = ""+result+"No naive stemming match";
+			return result;
+		}
 	}
 }

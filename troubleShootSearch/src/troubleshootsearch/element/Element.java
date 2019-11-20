@@ -9,7 +9,7 @@ public interface Element{
     public void accept(ExactMatcher exactMatcher);
     public void accept(NaiveBayesMatcher naiveBayesMatcher); 
     public void accept(SemanticMatcher semanticMatcher);  
-    public void accept(ExactMatcher exactMatcher, String inputFile);
-    public void accept(NaiveBayesMatcher naiveBayesMatcher, String inputFile); 
-    public void accept(SemanticMatcher semanticMatcher, String inputFile);  
+    public String accept(ExactMatcher exactMatcher, String inputFile);
+    public String accept(NaiveBayesMatcher naiveBayesMatcher, String inputFile); 
+    public String accept(SemanticMatcher semanticMatcher, String inputFile);  
 } 

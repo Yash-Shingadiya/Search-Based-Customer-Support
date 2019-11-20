@@ -19,51 +19,41 @@ public class SemanticMatcher implements Visitor{
 		this.inputString = myArrayList.getMyArrayList();
 	}
 
-	public void visit(MyTree myTree,String wordsFile){
+	public String visit(MyTree myTree,String wordsFile){ return null;}
 
-		FileProcessor fileProcessor = new FileProcessor(wordsFile);
-  
-  		String[] phrases = null;
-    	String info = null;
+	public String visit(MyTree myTree,String wordsFile,String word,String synonym){
+
+    	int count = 0;
     	String[] endpart;
+    	String result = "";
     	Map<String,String> synonyms = new HashMap<String,String>();
     	this.nodesList = myTree.getNodesList();
 		
 
-		try{    	
-
-			while((info = fileProcessor.readLineFromFile()) != null){
-		    		
-	    		phrases = info.split("=");	
-	    		synonyms.put(phrases[0],phrases[1]);
-	    	}
-	    }
-	    
-	    catch(Exception e){
-
-			System.err.println("Please check the formatting of input file");
-			System.exit(0);
-		}
-		
-		finally{}
-
 		for(int i = 0; i < this.inputString.size(); i++){
-		
-			for(int j = 0; j < this.nodesList.size(); j++){
-				
-				endpart = this.nodesList.get(j).getWord().split(" ");
-				
-				if(synonyms.containsKey(endpart[1])){
-					
-					if(this.inputString.get(i).contains(synonyms.get(endpart[1]))||this.inputString.get(i).contains(endpart[1])){
 
-						/*System.out.println(this.inputString.get(i));*/
-					}
+			endpart = wordsFile.split(" ");
+			if(!this.inputString.get(i).contains(endpart[1])){
+				
+				if((endpart[1].equals(word))||(endpart[1].equals(synonym))){
+
+					if((this.inputString.get(i).contains(word))||(this.inputString.get(i).contains(synonym))){
+						result = ""+result+this.inputString.get(i)+"\n";			
+						count++;
+
+					}	
 				}
-
-			}
+							
+			}	
 		}
 
-		/*System.out.println("No semantic match");*/
+		if(count > 0){
+			return result;
+		}
+		else{
+
+			result = ""+result+"No semantic match";
+			return result;
+		}
 	}
 }

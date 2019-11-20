@@ -15,20 +15,29 @@ public class ExactMatcher implements Visitor{
 		this.inputString = myArrayList.getMyArrayList();
 	}
 
-	public void visit(MyTree myTree,String wordsFile){
+	public String visit(MyTree myTree,String wordsFile){
 
 		this.nodesList = myTree.getNodesList();
+		String result = "";
+		int count = 0;
 
 		for(int i = 0; i < this.inputString.size(); i++){
+	
+			if(this.inputString.get(i).contains(wordsFile)){
 
-			for(int j = 0; j < this.nodesList.size(); j++){
-
-				if(this.inputString.get(i).contains(this.nodesList.get(j).getWord())){
-
-					/*System.out.println(this.inputString.get(i));*/
-				}
+				result = ""+result + this.inputString.get(i);
+				count++;
 			}
+			
 		}
-		/*System.out.println("No exact match");*/
+
+		if(count > 0){
+			return result;
+		}
+		else{
+			result = ""+result + "No exact match";
+			return result;
+		}
+		
 	}
 }

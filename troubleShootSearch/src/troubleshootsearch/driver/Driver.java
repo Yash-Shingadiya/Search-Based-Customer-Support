@@ -9,6 +9,8 @@ import troubleshootsearch.visitor.SemanticMatcher;
 import troubleshootsearch.visitor.NaiveBayesMatcher;
 import troubleshootsearch.util.MyLogger;
 import troubleshootsearch.util.MyLogger.DebugLevel;
+import troubleshootsearch.util.Results;
+import troubleshootsearch.util.FileProcessor;
 
 /**
  * @author Yash Shingadiya
@@ -36,7 +38,7 @@ public class Driver {
 		String input2 = "userInput.txt";
 		String input3 = "synonyms.txt";
 		String input4 = "output.txt";
-
+		String finalResults = "";
 		
 		if((args[0].equals(input1)) && (args[1].equals(input2)) && (args[2].equals(input3)) && (args[3].equals(input4))){
 
@@ -56,17 +58,43 @@ public class Driver {
 			ExactMatcher exactMatcher = new ExactMatcher();
 			myArrayList.accept(exactMatcher);
 
-			SemanticMatcher semanticMatcher = new SemanticMatcher();
-			myArrayList.accept(semanticMatcher);
-
 			NaiveBayesMatcher naiveBayesMatcher = new NaiveBayesMatcher();
 			myArrayList.accept(naiveBayesMatcher);
 
+			SemanticMatcher semanticMatcher = new SemanticMatcher();
+			myArrayList.accept(semanticMatcher);
+
 			MyTree myTree = new MyTree();
 			myTree.userInfoProcessing(input2);
-			myTree.accept(exactMatcher,input2);
-			myTree.accept(semanticMatcher,input3);
-			myTree.accept(naiveBayesMatcher,input2);			
+
+			FileProcessor fileProcessor = new FileProcessor(input2);
+	    	String info = null;
+	    	String info2 = null;
+
+			try{    	
+		    	while((info = fileProcessor.readLineFromFile()) != null){
+		    		
+		    		finalResults = finalResults+myTree.accept(exactMatcher,info)+"\n";
+		    		finalResults = finalResults+myTree.accept(naiveBayesMatcher,info)+"\n";
+		    		finalResults = finalResults+myTree.accept(semanticMatcher,info,input3)+"\n";
+		    	}
+		    	
+		    }
+		    
+		    catch(Exception e){
+
+				System.err.println("Please check the formatting of input file");
+				System.exit(0);
+			}
+			
+			finally{}
+			Results results = new Results();
+
+			/**
+			* For writing output to file
+			*/
+			results.writeToFile(args[3],finalResults);
+						
 		}	
 
 		else{
